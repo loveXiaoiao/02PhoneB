@@ -3,8 +3,6 @@ package com.example.phonebook;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.phonebook.entity.Contact;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,21 +11,23 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.phonebook.entity.Contact;
+
 public class ListViewAdapter extends BaseAdapter {
-	
-	private Context context;
+
+	private final Context context;
 	private List<Contact> contacts;
-	public  ListViewAdapter(Context context, List<Contact> contacts) {
+
+	public ListViewAdapter(Context context, List<Contact> contacts) {
 		this.context = context;
 		this.contacts = new ArrayList<Contact>();
 	}
+
 	public void setData(List<Contact> contacts) {
 		this.contacts = contacts;
 		this.notifyDataSetChanged();
-		
+
 	}
-	
-	
 
 	@Override
 	public int getCount() {
@@ -50,31 +50,34 @@ public class ListViewAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup arg2) {
 		// TODO Auto-generated method stub
-		ViewHolder holder = null ;
+		ViewHolder holder = null;
 		if (convertView == null) {
-			LayoutInflater inflater = (LayoutInflater)context .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			// 使用Vliew的对象itemView与R.layout.item关联
 			convertView = inflater.inflate(R.layout.my_listitem, null);
 			holder = new ViewHolder();
-			holder.contactName = (TextView) convertView.findViewById(R.id.itemTitle);
-			holder.contactAvatar = (ImageView) convertView.findViewById(R.id.itemImage);
+			holder.contactName = (TextView) convertView
+					.findViewById(R.id.itemTitle);
+			holder.contactAvatar = (ImageView) convertView
+					.findViewById(R.id.itemImage);
 			holder.phone = (TextView) convertView.findViewById(R.id.itemText);
-			
+
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		Contact contact = contacts.get(position); 
+		Contact contact = contacts.get(position);
 		holder.contactName.setText(contact.getName());
 		holder.phone.setText(contact.getTel());
-		if(contact.getPhoto() != null){
+		if (contact.getPhoto() != null) {
 			holder.contactAvatar.setImageBitmap(contact.getPhoto());
-		}else{
+		} else {
 			holder.contactAvatar.setImageResource(R.drawable.ic_launcher);
 		}
 		return convertView;
 	}
-	
+
 	private class ViewHolder {
 		public TextView contactName;
 		public TextView phone;
