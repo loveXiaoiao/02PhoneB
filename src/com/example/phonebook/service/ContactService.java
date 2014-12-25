@@ -48,16 +48,11 @@ public class ContactService {
 				hasPhone = "false";
 			// 如果有电话，根据联系人的ID查找到联系人的电话，电话可以是多个
 			String phoneNumber = "";
-			if (Boolean.parseBoolean(hasPhone)) {
-				Cursor phones = context.getContentResolver().query(
-						ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-						null,
-						ContactsContract.CommonDataKinds.Phone.CONTACT_ID
-								+ " = " + contactId, null, null);
-				phoneNumber = phones
-						.getString(phones
-								.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-			}
+			Cursor phone = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + contactId, null, null);
+            while(phone.moveToNext())
+            {
+            	phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));                
+            }
 
 			Long id = Long.parseLong(contactId);
 			Uri uri = ContentUris.withAppendedId(
