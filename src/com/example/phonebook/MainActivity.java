@@ -1,8 +1,5 @@
 package com.example.phonebook;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,9 +9,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-
 import com.example.phonebook.entity.Contact;
 import com.example.phonebook.service.ContactService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -28,7 +27,6 @@ public class MainActivity extends Activity {
 		this.setTitle("PhoneBook");
 		contacts = new ContactService(this).getContacts();
 		ListViewAdapter adapter = new ListViewAdapter(this, contacts);
-		adapter.setData(contacts);
 		listView = (ListView) this.findViewById(R.id.MyListItem);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {

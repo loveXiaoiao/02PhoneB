@@ -1,8 +1,5 @@
 package com.example.phonebook;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,23 +7,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.phonebook.entity.Contact;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListViewAdapter extends BaseAdapter {
 
 	private final Context context;
-	private List<Contact> contacts;
+	private List<Contact> contacts = new ArrayList<Contact>();
 
 	public ListViewAdapter(Context context, List<Contact> contacts) {
 		this.context = context;
-		this.contacts = new ArrayList<Contact>();
-	}
-
-	public void setData(List<Contact> contacts) {
-		this.contacts = contacts;
-		this.notifyDataSetChanged();
-
+		if (contacts != null) this.contacts = contacts;
 	}
 
 	@Override
